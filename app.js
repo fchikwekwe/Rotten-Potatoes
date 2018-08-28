@@ -17,7 +17,8 @@ app.set('view engine', 'handlebars');
 
 let reviews = [
     { title: "Great Review" },
-    { title: "Next Review" }
+    { title: "Next Review" },
+    { title: "Terrible Review"}
 ]
 
 app.get('/reviews', (req, res) => {
