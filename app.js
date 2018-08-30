@@ -1,4 +1,5 @@
 const express = require('express')
+const methodOverride = require('method-override')
 const app = express()
 
 const mongoose = require('mongoose');
@@ -14,11 +15,7 @@ const Review =  mongoose.model('Review', {
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-    res.render('reviews-index', { reviews: reviews});
-    // res.render('home', { msg: 'Hello World!' });
-})
+app.use(methodOverride('_method'))
 
 app.listen(3000, () => {
     console.log('App listening on port 3000!')
@@ -28,16 +25,17 @@ var exphbs = require('express-handlebars');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-
+/*
 let reviews = [
     { title: "Great Review" },
     { title: "Next Review" },
     { title: "Terrible Review"}
 ]
+*/
 
 // INDEX
 app.get('/', (req, res) => {
-    Reviews.find()
+    Review.find()
         .then(reviews => {
             res.render('reviews-index', { reviews: reviews});
         })
@@ -68,4 +66,22 @@ app.get('/reviews/:id', (req, res) => {
     }).catch((err) => {
         console.log(err.message);
     })
+})
+
+// EDIT
+app.get('/reviews/:id/edit', function (req, res) {
+    Review.findById(req.params.is, function(err, review) {
+        res.render('reviews-edit', {review: review});
+    })
+})
+
+// UPDATE
+app.put('/reviews/:id', (req, res) => {
+    Review.findByIdAndUpdate(req.params.id, req.body)
+        .then(review =>{
+            res.redirect(`/reviews/${review._id}`)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
 })
