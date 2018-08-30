@@ -1,6 +1,13 @@
 const express = require('express')
 const app = express()
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
+
+const Review =  mongoose.model('Review', {
+    title: String
+});
+
 app.get('/', (req, res) => {
     res.render('reviews-index', { reviews: reviews});
     // res.render('home', { msg: 'Hello World!' });
@@ -21,6 +28,12 @@ let reviews = [
     { title: "Terrible Review"}
 ]
 
-app.get('/reviews', (req, res) => {
-    res.render('reviews-index', { reviews: reviews});
+app.get('/', (req, res) => {
+    Review.find()
+        .then(reviews => {
+            res.render('reviews-index', { reviews: reviews});
+        })
+        .catch(err => {
+            console.log(err);
+        })
 })
