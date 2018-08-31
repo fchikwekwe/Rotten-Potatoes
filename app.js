@@ -52,7 +52,7 @@ app.get('/reviews/new', (req, res) => {
 // CREATE
 app.post('/reviews', (req, res) => {
     Review.create(req.body).then((review) =>{
-        console.log(review);
+        console.log(review)
         res.redirect('/');
     }).catch((err) => {
         console.log(err.message);
@@ -78,10 +78,21 @@ app.get('/reviews/:id/edit', function (req, res) {
 // UPDATE
 app.put('/reviews/:id', (req, res) => {
     Review.findByIdAndUpdate(req.params.id, req.body)
-        .then(review =>{
+        .then(review => {
             res.redirect(`/reviews/${review._id}`)
         })
         .catch(err => {
             console.log(err.message)
         })
+})
+
+//DELETE
+
+app.delete('/reviews/:id', function (req, res) {
+    console.log("DELETE review")
+    Review.findByIdAndRemove(req.params.id).then((review) => {
+            res.redirect('/');
+    }).catch((err) => {
+        console.log(err.message);
+    })
 })
