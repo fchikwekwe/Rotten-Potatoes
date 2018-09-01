@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 
 const reviews = require('./controllers/reviews.js')
 
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost/rotten-potatoes');
+
 reviews(app)
 
 app.use(bodyParser.urlencoded({ extended: true }));
