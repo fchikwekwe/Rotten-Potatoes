@@ -1,3 +1,5 @@
+const Comment = require('../models/comment')
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/rotten-potatoes', { useMongoClient: true });
 
