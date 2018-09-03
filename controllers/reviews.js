@@ -21,9 +21,9 @@ function reviews(app) {
 
     // CREATE
     app.post('/reviews', (req, res) => {
-        Review.create(req.body).then((review) =>{
+        Review.create(req.body).then((review) => {
             console.log(review)
-            res.redirect('/');
+            res.redirect('/reviews/${review._id}');
         }).catch((err) => {
             console.log(err.message);
         })
@@ -32,7 +32,7 @@ function reviews(app) {
     // SHOW
     app.get('/reviews/:id', (req, res) => {
         Review.findById(req.params.id).then(review => {
-            Comment.find({ reviewId: req.params.id }).then(comments =>{
+            Comment.find({ reviewId: req.params.id }).then(comments => {
                 res.render('reviews-show', { review: review, comments: comments })
             })
         }).catch((err) => {
@@ -43,7 +43,8 @@ function reviews(app) {
     // EDIT
     app.get('/reviews/:id/edit', function (req, res) {
         Review.findById(req.params.id, function(err, review) {
-            res.render('review-edit', {review: review});
+            res.render('reviews-edit', {review: review});
+            //res.render('review-edit', {review: review});
         })
     })
 
@@ -67,16 +68,6 @@ function reviews(app) {
         }).catch((err) => {
             console.log(err.message);
         })
-    })
-
-    // DELETE
-    app.delete('/reviews/comments/:id', function (req, res) {
-      console.log("DELETE comment")
-      Comment.findByIdAndRemove(req.params.id).then((comment) => {
-        res.redirect(`/reviews/${comment.reviewId}`);
-      }).catch((err) => {
-        console.log(err.message);
-      })
     })
 
 }
