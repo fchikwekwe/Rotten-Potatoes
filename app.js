@@ -6,10 +6,10 @@ const bodyParser = require('body-parser');
 
 const reviews = require('./controllers/reviews.js')
 const comments = require('./controllers/comments.js')
-/*
+
 const Comment = require('./models/comment')
 const Reviews = require('./models/review')
-*/
+
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost/rotten-potatoes');
 
