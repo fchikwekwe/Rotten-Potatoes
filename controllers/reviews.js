@@ -23,7 +23,7 @@ function reviews(app) {
     app.post('/reviews', (req, res) => {
         Review.create(req.body).then((review) => {
             console.log(review)
-            res.redirect('/reviews/${review._id}');
+            res.redirect(`/reviews/${review._id}`);
         }).catch((err) => {
             console.log(err.message);
         })
@@ -43,8 +43,7 @@ function reviews(app) {
     // EDIT
     app.get('/reviews/:id/edit', function (req, res) {
         Review.findById(req.params.id, function(err, review) {
-            res.render('reviews-edit', {review: review});
-            //res.render('review-edit', {review: review});
+            res.render('review-edit', {review: review});
         })
     })
 
@@ -52,7 +51,7 @@ function reviews(app) {
     app.put('/reviews/:id', (req, res) => {
         Review.findByIdAndUpdate(req.params.id, req.body)
             .then(review => {
-                res.redirect('/reviews/${review._id}')
+                res.redirect(`/reviews/${review._id}`)
             })
             .catch(err => {
                 console.log(err.message)
