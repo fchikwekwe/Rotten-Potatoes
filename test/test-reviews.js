@@ -1,8 +1,8 @@
 const chai = require('chai');
-const chatHttp = require('chai-http');
-const server = require('../server');
+const chaiHttp = require('chai-http');
+const server = require('../app');
 const should = chai.should();
-const Review = require('..models/review');
+const Review = require('../models/review.js');
 
 chai.use(chaiHttp);
 
@@ -10,7 +10,7 @@ describe('Reviews', () => {
 
     // TEST INDEX
     it('should index ALL reviews on /GET', (done) => {
-        chai.request(server)
+        chai.request('http://localhost:3000')
             .get('/')
             .end((err, res) => {
                 res.should.have.status(200);
@@ -26,3 +26,5 @@ describe('Reviews', () => {
     // TEST UPDATE
     // TEST DELETE
 });
+
+module.review = server; 
