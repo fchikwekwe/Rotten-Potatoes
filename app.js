@@ -21,10 +21,10 @@ app.use(methodOverride('_method'));
 
 const reviews = require('./controllers/reviews.js');
 const comments = require('./controllers/comments.js');
+const movies = require('./controllers/movies.js');
+
 reviews(app);
 comments(app);
-
-
 
 app.listen(3000, () => {
     console.log('App listening on port 3000!')

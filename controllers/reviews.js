@@ -1,5 +1,7 @@
-const Review = require('../models/review.js')
-const Comment = require('../models/comment.js')
+const Review = require('../models/review')
+const Comment = require('../models/comment')
+const MovieDb = require('moviedb-promise')
+const moviedb = new MovieDb('23361b10253ea4a933bb622178f943e7')
 
 function reviews(app) {
     // INDEX
@@ -15,15 +17,14 @@ function reviews(app) {
     // });
 
     // NEW
-    app.get('/reviews/new', (req, res) => {
-        res.render('reviews-new', {});
+    app.get('/movies/:movieId/reviews/new', (req, res) => {
+        res.render('reviews-new', { movieId: req.params.movieId});
     })
 
     // CREATE
-    app.post('/reviews', (req, res) => {
+    app.post('/movies/:movieId/reviews', (req, res) => {
         Review.create(req.body).then((review) => {
-            console.log(review)
-            res.redirect(`/reviews/${review._id}`);
+            res.redirect(`/movies/${req.params.movieId}`);
         }).catch((err) => {
             console.log(err.message);
         })
@@ -58,8 +59,7 @@ function reviews(app) {
             })
         })
 
-        //DELETE
-
+    //DELETE
     app.delete('/reviews/:id', function (req, res) {
         console.log("DELETE review")
         Review.findByIdAndRemove(req.params.id).then((review) => {
