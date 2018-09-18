@@ -4,21 +4,10 @@ const MovieDb = require('moviedb-promise')
 const moviedb = new MovieDb('23361b10253ea4a933bb622178f943e7')
 
 function reviews(app) {
-    // INDEX
-
-    // app.get('/', (req, res) => {
-    //     Review.find()
-    //         .then(reviews => {
-    //             res.render('reviews-index', {reviews: reviews});
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         });
-    // });
 
     // NEW
     app.get('/movies/:movieId/reviews/new', (req, res) => {
-        res.render('reviews-new', { movieId: req.params.movieId});
+        res.render('reviews-new', { movieId: req.params.movieId });
     })
 
     // CREATE

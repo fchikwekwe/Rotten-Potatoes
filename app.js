@@ -18,13 +18,12 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+//
+// require('./controllers/reviews.js')(app);
+// require('./controllers/comments.js')(app);
+require('./controllers/movies.js')(app);
 
-const reviews = require('./controllers/reviews.js');
-const comments = require('./controllers/comments.js');
-const movies = require('./controllers/movies.js');
 
-reviews(app);
-comments(app);
 
 app.listen(3000, () => {
     console.log('App listening on port 3000!')
