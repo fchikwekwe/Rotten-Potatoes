@@ -7,8 +7,12 @@ function reviews(app) {
 
     // NEW
     app.get('/movies/:movieId/reviews/new', (req, res) => {
-        res.render('reviews-new', { movieId: req.params.movieId });
-    })
+        Review.find({ movieId: req.params.movieId }).then((movie) =>{
+            res.render('reviews-new', {
+                movieId: req.params.movieId
+            });
+        });
+    });
 
     // CREATE
     app.post('/movies/:movieId/reviews', (req, res) => {
@@ -20,7 +24,7 @@ function reviews(app) {
     })
 
     // SHOW
-    app.get('/reviews/:id', (req, res) => {
+    app.get('/movies/:movieId/reviews/:id', (req, res) => {
         Review.findById(req.params.id).then(review => {
             Comment.find({ reviewId: req.params.id }).then(comments => {
                 res.render('reviews-show', { review: review, comments: comments })

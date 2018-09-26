@@ -18,9 +18,9 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-//
-// require('./controllers/reviews.js')(app);
-// require('./controllers/comments.js')(app);
+
+require('./controllers/reviews.js')(app);
+require('./controllers/comments.js')(app);
 require('./controllers/movies.js')(app);
 
 
