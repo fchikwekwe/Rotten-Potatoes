@@ -1,7 +1,7 @@
-const Review = require('../models/review')
-const Comment = require('../models/comment')
-const MovieDb = require('moviedb-promise')
-const moviedb = new MovieDb('23361b10253ea4a933bb622178f943e7')
+const Review = require('../models/review');
+const Comment = require('../models/comment');
+const MovieDb = require('moviedb-promise');
+const moviedb = new MovieDb('23361b10253ea4a933bb622178f943e7');
 
 function reviews(app) {
 

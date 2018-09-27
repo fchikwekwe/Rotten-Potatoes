@@ -22,7 +22,7 @@ module.exports = (app) => {
                  movie.trailer_youtube_id = videos.results[0].key
                  renderTemplate(movie);
              })
-                .catch(console.error)
+             .catch(console.error)
              function renderTemplate(movie) {
                  Review.find({ movieId: req.params.id })
                  .then(reviews => {
