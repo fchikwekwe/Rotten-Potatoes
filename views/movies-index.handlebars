@@ -1,10 +1,10 @@
 <h1>Now Playing</h1>
 <div class="row">
 {{#each movies}}
-    <div class="col-md-3">
+    <div class="col-md-2">
         <p>{{this.title}}</p>
     <p><a href="/movies/{{this.id}}">
-        <img src="https://image.tmdb.org/t/p/w500{{this.poster_path}}" alt="{{this.title}}" width="150">
+        <img src="https://image.tmdb.org/t/p/w500{{this.poster_path}}" alt="{{this.title}}" width="120">
     </a></p>
     </div>
 {{/each}}

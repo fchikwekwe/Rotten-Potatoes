@@ -6,7 +6,7 @@
         <p>{{review.description}}</p>
         <p>{{review.rating}}<p>
         <!-- EDIT BUTTON -->
-        <p><a href="/movies/{{movie.id}}/reviews/{{review._id}}/edit">Edit</a></p>
+        <p><a href="/reviews/{{review._id}}/edit">Edit</a></p>
         <!-- DELETE BUTTON -->
         <p><form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
             <button type="submit">Delete</button>
@@ -20,9 +20,10 @@
         <hr>
 
         <!-- Show Comments -->
-        {{#each comments}}
-            {{> comment}}
-        {{/each}}
-
+        <div class="col-sm-4" id="comments">
+            {{#each comments}}
+                {{> comment}}
+            {{/each}}
+        </div>
     </div>
 </div>

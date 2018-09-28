@@ -26,10 +26,12 @@ function reviews(app) {
     // SHOW
     app.get('/movies/:movieId/reviews/:id', (req, res) => {
         Review.findById(req.params.id).then(review => {
+            //fetch its comments
             Comment.find({ reviewId: req.params.id }).then(comments => {
                 res.render('reviews-show', { review: review, comments: comments })
             })
         }).catch((err) => {
+            // catch errors
             console.log(err.message)
         });
     });
@@ -37,7 +39,7 @@ function reviews(app) {
     // EDIT
     app.get('/reviews/:id/edit', function (req, res) {
         Review.findById(req.params.id, function(err, review) {
-            res.render('review-edit', {review: review});
+            res.render('reviews-edit', { review: review });
         })
     })
 
@@ -45,7 +47,7 @@ function reviews(app) {
     app.put('/reviews/:id', (req, res) => {
         Review.findByIdAndUpdate(req.params.id, req.body)
             .then(review => {
-                res.redirect(`/reviews/${review._id}`)
+                res.redirect(`/movies/${review.movieId}/reviews/${review._id}`)
             })
             .catch(err => {
                 console.log(err.message)
@@ -56,7 +58,7 @@ function reviews(app) {
     app.delete('/reviews/:id', function (req, res) {
         console.log("DELETE review")
         Review.findByIdAndRemove(req.params.id).then((review) => {
-            res.redirect('/');
+            res.redirect('back');
         }).catch((err) => {
             console.log(err.message);
         })

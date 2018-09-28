@@ -18,6 +18,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 
 require('./controllers/reviews.js')(app);
 require('./controllers/comments.js')(app);
