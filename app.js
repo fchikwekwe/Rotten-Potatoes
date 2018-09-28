@@ -19,11 +19,12 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 require('./controllers/reviews.js')(app);
 require('./controllers/comments.js')(app);
 require('./controllers/movies.js')(app);
-
+require('./controllers/admin.js')(app);
 
 app.listen(3000, () => {
     console.log('App listening on port 3000!')

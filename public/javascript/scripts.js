@@ -1,14 +1,14 @@
 
 
-axios.get('http://www.thecolorapi.com/id?hex=24B1E0')
-    .then(function (response){
-        //handle success
-        alert(response.hex.value);
-    })
-    .catch(function (error){
-        //handle error
-        console.log(error);
-    })
+// axios.get('http://www.thecolorapi.com/id?hex=24B1E0')
+//     .then(function (response){
+//         //handle success
+//         alert(response.hex.value);
+//     })
+//     .catch(function (error){
+//         //handle error
+//         console.log(error);
+//     })
 
 // listen for a form submit event
 document.getElementById("newComment").addEventListener("submit", e =>{
@@ -26,8 +26,21 @@ document.getElementById("newComment").addEventListener("submit", e =>{
         .then(function (response) {
         // wait for the success response from the server
         console.log(response);
-        // remove the information from the information
+
+        let form = document.getElementById('newComment');
+
+        form.reset();
         // display the data as a new comment on the page
+        document.getElementById('comments').innerHTML +=
+            `
+            <div class="card" id="${this._id}">
+                <div class="card-block">
+                    <h4 class="card-title">${response.data.title}</h4>
+                    <p class="card-text">${response.data.content}</p>
+                    <p><button class="btn btn-link" id="deleteComment" data-comment-id=${response._id}>Delete</button></p>
+                </div>
+            </div>
+            `
         })
         .catch(function (error) {
             console.log(error);
@@ -36,29 +49,19 @@ document.getElementById("newComment").addEventListener("submit", e =>{
         })
 })
 
-axios.post('/user', comment)
-.then(function (response) {
-    // wait for the success response from the server
-    console.log(response);
-    // remove the information from the information
-    this.reset();
-    // display the data as a new comment on the page
-    document.getElementById('comments').prepend(
-        `
-        <div class="card" id="${this._id}">
-            <div class="card-block">
-                <h4 class="card-title">${response.title}</h4>
-                <p class="card-text">${response.content}</p>
-                <p><button class="btn btn-link" id="deleteComment" data-comment-id=${response._id}>Delete</button></p>
-            </div>
-        </div>
-        `
-    );
-})
+// axios.post('/user', comment)
+// .then(function (response) {
+//     // wait for the success response from the server
+//     console.log(response);
+//     // remove the information from the information
+//
+// })
 
-document.getElementById('delete-comment').addEventListener('click', (e) => {
+document.getElementById('deleteComment').addEventListener('click', (e) => {
     console.log("click!")
-    let commentId = this.getAttribute('data-comment-id')
+    let comment = document.getElementById('deleteComment')
+    let commentId = comment.getAttribute('data-comment-id')
+    console.log(commentId)
     axios.delete(`/reviews/comments/${commentId}`)
         .then(response => {
             console.log(response)

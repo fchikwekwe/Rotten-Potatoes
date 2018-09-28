@@ -28,8 +28,12 @@ function reviews(app) {
         Review.findById(req.params.id)
         .then(review => {
             //fetch its comments
+            console.log(req.params.id)
             Comment.find({ reviewId: req.params.id })
+
             .then(comments => {
+                console.log(review._id)
+                // console.log(comments)
                 res.render('reviews-show', { review: review, comments: comments })
                 })
             }).catch((err) => {
