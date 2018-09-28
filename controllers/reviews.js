@@ -25,12 +25,14 @@ function reviews(app) {
 
     // SHOW
     app.get('/movies/:movieId/reviews/:id', (req, res) => {
-        Review.findById(req.params.id).then(review => {
+        Review.findById(req.params.id)
+        .then(review => {
             //fetch its comments
-            Comment.find({ reviewId: req.params.id }).then(comments => {
+            Comment.find({ reviewId: req.params.id })
+            .then(comments => {
                 res.render('reviews-show', { review: review, comments: comments })
-            })
-        }).catch((err) => {
+                })
+            }).catch((err) => {
             // catch errors
             console.log(err.message)
         });
