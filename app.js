@@ -13,7 +13,7 @@ const Reviews = require('./models/review');
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost/rotten-potatoes', {useNewUrlParser: true});
 
-
+app.set('port', process.env.PORT || 3000);
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,7 +26,7 @@ require('./controllers/comments.js')(app);
 require('./controllers/movies.js')(app);
 require('./controllers/admin.js')(app);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('App listening on port 3000!')
 })
 
