@@ -1,6 +1,6 @@
 const Comment = require('../models/comment.js')
 
-function comments(app) {
+module.exports = function (app) {
     // NEW Comment
     app.post('/reviews/comments', (req, res) =>{
         console.log(req.body)
@@ -22,5 +22,3 @@ function comments(app) {
     })
 
 }
-
-module.exports = comments;

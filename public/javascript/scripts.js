@@ -72,4 +72,21 @@ document.getElementById('deleteComment').addEventListener('click', (e) => {
             console.log(error)
             alert('There was an error deleting this comment.')
         });
+
+
+document.getElementById('deleteReview').addEventListener('click', (e) => {
+    console.log("delete!")
+    let review = document.getElementById('deleteReview')
+    let reviewId = review.getAttribute('data-review-id')
+    console.log(reviewId)
+    axios.delete(`/admin/delete/${reviewId}`)
+        .then(response => {
+            console.log(response)
+            review = document.getElementById(reviewId)
+            review.parentNode.removeChild(review); // OR comment.style.display = 'none'
+        })
+        .catch(error => {
+            console.log(error)
+            alert('There was an error deleting this review.')
+        });
 })

@@ -16,11 +16,12 @@ module.exports = function (app) {
 
     app.delete('/admin/delete/:id', function (req, res) {
       console.log("DELETE review")
-      Comment.findByIdAndRemove(req.params.id).then(review => {
+      Review.findByIdAndRemove(req.params.id)
+      .then(review => {
         res.status(200).send(review);
       }).catch((err) => {
           console.log(err.message);
-        res.status(400).send(err)
+          res.status(400).send(err)
         });
     });
 }
