@@ -9,46 +9,48 @@
 //         //handle error
 //         console.log(error);
 //     })
-
+// const deleteIt =document.getElementById('deleteReview');
+// console.log(deleteIt.innerHTML)
+console.log('1')
 // listen for a form submit event
-document.getElementById("newComment").addEventListener("submit", e =>{
-    // prevent the default form behavior
-    e.preventDefault();
-
-    // serialize the form data into an object
-    let comment = {};
-    const inputs = document.getElementsByClassName('form-control');
-    for (var i = 0; i < inputs.length; i++){
-        comment[inputs[i].name] = inputs[i].value;
-    }
-    // use axios to initialize a post request and send
-    axios.post('/reviews/comments', comment)
-        .then(function (response) {
-        // wait for the success response from the server
-        console.log(response);
-
-        let form = document.getElementById('newComment');
-
-        form.reset();
-        // display the data as a new comment on the page
-        document.getElementById('comments').innerHTML +=
-            `
-            <div class="card" id="${this._id}">
-                <div class="card-block">
-                    <h4 class="card-title">${response.data.title}</h4>
-                    <p class="card-text">${response.data.content}</p>
-                    <p><button class="btn btn-link" id="deleteComment" data-comment-id=${response._id}>Delete</button></p>
-                </div>
-            </div>
-            `
-        })
-        .catch(function (error) {
-            console.log(error);
-            // handle any errors
-            alert('There was a problem saving your comment. Please try again.')
-        })
-})
-
+// document.getElementById("newComment").addEventListener("submit", e =>{
+//     // prevent the default form behavior
+//     e.preventDefault();
+//
+//     // serialize the form data into an object
+//     let comment = {};
+//     const inputs = document.getElementsByClassName('form-control');
+//     for (var i = 0; i < inputs.length; i++){
+//         comment[inputs[i].name] = inputs[i].value;
+//     }
+//     // use axios to initialize a post request and send
+//     axios.post('/reviews/comments', comment)
+//         .then(function (response) {
+//         // wait for the success response from the server
+//         console.log(response);
+//
+//         let form = document.getElementById('newComment');
+//
+//         form.reset();
+//         // display the data as a new comment on the page
+//         document.getElementById('comments').innerHTML +=
+//             `
+//             <div class="card" id="${this._id}">
+//                 <div class="card-block">
+//                     <h4 class="card-title">${response.data.title}</h4>
+//                     <p class="card-text">${response.data.content}</p>
+//                     <p><button class="btn btn-link" id="deleteComment" data-comment-id=${response._id}>Delete</button></p>
+//                 </div>
+//             </div>
+//             `
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//             // handle any errors
+//             alert('There was a problem saving your comment. Please try again.')
+//         })
+// })
+console.log('2');
 // axios.post('/user', comment)
 // .then(function (response) {
 //     // wait for the success response from the server
@@ -57,36 +59,44 @@ document.getElementById("newComment").addEventListener("submit", e =>{
 //
 // })
 
-document.getElementById('deleteComment').addEventListener('click', (e) => {
-    console.log("click!")
-    let comment = document.getElementById('deleteComment')
-    let commentId = comment.getAttribute('data-comment-id')
-    console.log(commentId)
-    axios.delete(`/reviews/comments/${commentId}`)
-        .then(response => {
-            console.log(response)
-            comment = document.getElementById(commentId)
-            comment.parentNode.removeChild(comment); // OR comment.style.display = 'none'
-        })
-        .catch(error => {
-            console.log(error)
-            alert('There was an error deleting this comment.')
-        });
+// document.getElementById('deleteComment').addEventListener('click', (e) => {
+//     console.log("click!")
+//     let comment = document.getElementById('deleteComment')
+//     let commentId = comment.getAttribute('data-comment-id')
+//     console.log(commentId)
+//     axios.delete(`/reviews/comments/${commentId}`)
+//         .then(response => {
+//             console.log(response)
+//             comment = document.getElementById(commentId)
+//             comment.parentNode.removeChild(comment); // OR comment.style.display = 'none'
+//         })
+//         .catch(error => {
+//             console.log(error)
+//             alert('There was an error deleting this comment.')
+//         });
+//     });
 
+console.log('3');
+let deleteElements = document.getElementByid('deleteReview');
+deleteElements.addEventListener('click', (e) => {
 
-document.getElementById('deleteReview').addEventListener('click', (e) => {
-    console.log("delete!")
-    let review = document.getElementById('deleteReview')
-    let reviewId = review.getAttribute('data-review-id')
+    e.preventDefault();
+    console.log(this.innerHTML);
+
+    let deleteElements = document.getElementsByClassName('deleteReview');
+
+    for (review of deleteElements){
+		console.log(review.getAttribute('data-review-id'))
+}
     console.log(reviewId)
-    axios.delete(`/admin/delete/${reviewId}`)
-        .then(response => {
-            console.log(response)
-            review = document.getElementById(reviewId)
-            review.parentNode.removeChild(review); // OR comment.style.display = 'none'
-        })
-        .catch(error => {
-            console.log(error)
-            alert('There was an error deleting this review.')
-        });
-})
+    // axios.delete(`/admin/delete/${reviewId}`)
+    //     .then(response => {
+    //         console.log(response)
+    //         review = document.getElementById(reviewId)
+    //         review.parentNode.removeChild(review); // OR comment.style.display = 'none'
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //         alert('There was an error deleting this review.')
+    //     });
+});
