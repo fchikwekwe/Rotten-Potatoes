@@ -16,7 +16,6 @@ module.exports = function (app) {
 
     app.delete('/admin/delete/:id', function (req, res) {
       console.log("DELETE review")
-      
       Review.findByIdAndRemove(req.params.id)
       .then(review => {
         res.status(200).send(review);

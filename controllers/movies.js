@@ -18,7 +18,7 @@ module.exports = (app) => {
         .then(movie => {
             // if conditional <=================================
              moviedb.movieVideos({ id: req.params.id })
-             .then(videos => {
+             .then(videos => { 
                  movie.trailer_youtube_id = videos.results[0].key
                  renderTemplate(movie);
              })
