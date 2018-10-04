@@ -1,4 +1,6 @@
-
+//
+// let newComment = document.getElementById("newComment");
+// console.log(newComment);
 document.getElementById("newComment").addEventListener("submit", e =>{
     // prevent the default form behavior
     e.preventDefault();
@@ -36,7 +38,6 @@ document.getElementById("newComment").addEventListener("submit", e =>{
             alert('There was a problem saving your comment. Please try again.')
         })
 })
-console.log('2');
 axios.post('/user', comment)
 .then(function (response) {
     // wait for the success response from the server
