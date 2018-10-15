@@ -1,3 +1,1 @@
-Rotten Tomatoes clone built for Back-End Web Development class at Make School. Built with Node.js, Express.js and MongoDB.
-
-Fully functional using MovieDB API. 
+Rotten tomatoes clone built for back end web development course. We learned about MVC, RESTful and resourceful routing and used MongoDB, Node.js, Express.js, Ajax, Handlebars. Integreated Movie DB API. Also used Mocha and chai for testing.
