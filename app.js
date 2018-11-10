@@ -16,10 +16,11 @@ mongoose.connect(process.env.MONGOBD_URI || 'mongodb://localhost/rotten-potatoes
 app.set('port', process.env.PORT || 3000);
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
-app.use(bodyParser.json());
+
 
 require('./controllers/reviews.js')(app);
 require('./controllers/comments.js')(app);
