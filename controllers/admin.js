@@ -3,7 +3,7 @@ const Review = require('../models/review')
 
 module.exports = function (app) {
 
-    // NEW Comment
+    // Admin Dashboard
     app.get('/admin', (req, res) =>{
         Review.find()
         .then(reviews => {
