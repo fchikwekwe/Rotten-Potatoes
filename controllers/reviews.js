@@ -42,14 +42,14 @@ module.exports = function (app) {
         });
     });
 
-    // EDIT
+    // EDIT; show an edit template
     app.get('/reviews/:id/edit', function (req, res) {
         Review.findById(req.params.id, function(err, review) {
             res.render('reviews-edit', { review: review });
         })
     })
 
-    // UPDATE
+    // UPDATE; make a change to the database 
     app.put('/reviews/:id', (req, res) => {
         Review.findByIdAndUpdate(req.params.id, req.body)
             .then(review => {
